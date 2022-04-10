@@ -125,26 +125,33 @@ type Status struct {
 		Connected bool `json:"connected"`
 	} `json:"mqtt"`
 
-	Cloud     Cloud  `json:"cloud"`
-	Time      string `json:"time"`
-	UnixTime  int64  `json:"unixtime"`
-	Serial    int    `json:"serial"`
-	HasUpdate bool   `json:"has_update"`
-	Mac       string `json:"mac"`
-	Update    Update `json:"update"`
-	RamTotal  int64  `json:"ram_total"`
-	RamFree   int64  `json:"ram_free"`
-	RamLwm    int64  `json:"ram_lwm"`
-	FSSize    int64  `json:"fs_size"`
-	FSFree    int64  `json:"fs_free"`
-	Uptime    int64  `json:"uptime"`
+	Cloud     Cloud          `json:"cloud"`
+	Time      string         `json:"time"`
+	UnixTime  int64          `json:"unixtime"`
+	Serial    int            `json:"serial"`
+	HasUpdate bool           `json:"has_update"`
+	Mac       string         `json:"mac"`
+	Update    FirmwareStatus `json:"update"`
+	RamTotal  int64          `json:"ram_total"`
+	RamFree   int64          `json:"ram_free"`
+	RamLwm    int64          `json:"ram_lwm"`
+	FSSize    int64          `json:"fs_size"`
+	FSFree    int64          `json:"fs_free"`
+	Uptime    int64          `json:"uptime"`
 }
 
-type Update struct {
-	Status     string `json:"status"`
-	HasUpdate  bool   `json:"has_update"`
-	NewVersion string `json:"new_version"`
-	OldVersion string `json:"old_version"`
+type FirmwareStatus struct {
+	Status      string `json:"status"`
+	HasUpdate   bool   `json:"has_update"`
+	NewVersion  string `json:"new_version"`
+	OldVersion  string `json:"old_version"`
+	BetaVersion string `json:"beta_version,omitempty"`
+}
+
+type FirmwareUpdate struct {
+	Url    string `qs:"url,omitempty"`
+	Update bool   `qs:"update,omitempty"`
+	Beta   bool   `qs:"beta,omitempty"`
 }
 
 type STASettings struct {

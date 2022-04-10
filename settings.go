@@ -80,7 +80,7 @@ func (c *Client) SetWiFiSTABackup(setting WiFiSTA) (WiFiSTA, error) {
 }
 
 /** MQTT **/
-func (c *Client) SetMQTTSettings(setting MQTT) (Settings, error) {
+func (c *Client) SetMQTTSettings(setting MQTT) (MQTT, error) {
 
 	// Prepare request
 	var result Settings
@@ -89,12 +89,12 @@ func (c *Client) SetMQTTSettings(setting MQTT) (Settings, error) {
 
 	values, err := qs.NewEncoder().Values(&setting)
 	if err != nil {
-		return result, err
+		return result.MQTT, err
 	}
 	req.SetQueryString(values.Encode())
 	req.SetResult(&result)
 
 	// Perform request
 	_, err = req.Get(fmt.Sprintf("%s/settings", c.BaseURL))
-	return result, err
+	return result.MQTT, err
 }

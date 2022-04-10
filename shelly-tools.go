@@ -56,30 +56,3 @@ func (c *Client) AvailableFirmwares() ([]Firmware, error) {
 func (fw *Firmware) ToSemVer() *semver.Version {
 	return semver.New(fw.Version[1:])
 }
-
-func (c *Client) UpdateToLatestFirmware() (Update, error) {
-
-	var result Update
-
-	// Fetch firmwares
-	fw, err := c.AvailableFirmwares()
-	if err != nil {
-		return result, err
-	}
-	if len(fw) < 1 {
-		return result, ErrNoFirmWaresFound
-	}
-
-	// Prepare request
-	req := c.R()
-	req.SetHeader("Accept", "application/json")
-	req.SetResult(&result)
-
-	// Perform request
-	_, err = req.Get(fw[0].OTAUrl)
-	if err != nil {
-		return result, err
-	}
-
-	return result, nil
-}
