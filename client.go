@@ -16,6 +16,7 @@ func New(address string) *Client {
 
 func NewWithClient(address string, hc *http.Client) *Client {
 	rc := *resty.NewWithClient(hc)
-	rc.BaseURL = address
+	rc.SetScheme("http")
+	rc.SetBaseURL(address)
 	return &Client{&rc}
 }
