@@ -2,19 +2,15 @@ package shelly
 
 import "fmt"
 
-func (c *Client) Shelly() (Shelly, error) {
+func (c *Client) Status() (Status, error) {
 
 	// Prepare request
-	var result Shelly
+	var result Status
 	req := c.R()
 	req.SetHeader("Accept", "application/json")
 	req.SetResult(&result)
 
 	// Perform request
-	_, err := req.Get(fmt.Sprintf("%s/shelly", c.BaseURL))
+	_, err := req.Get(fmt.Sprintf("%s/status", c.BaseURL))
 	return result, err
-}
-
-func (c *Client) Ping() error {
-	return nil
 }
