@@ -1,1 +1,1 @@
-# Go API wrapper for Shelly device interactions
+# Go client for easy interaction with Shelly devices
